@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <title>Native language translator</title>
+  <style>
+      h1 {
+        text-align: center;
+        color: crimson;
+      }
+  </style>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#trnaslate-button").click(function() {                    
+          $.ajax({
+            method: "POST",
+            url: "translate",
+            data: {
+              text: $("#translate-text").val(),
+              from_language: $("#from-language :selected").attr("value"),
+              to_language: $("#to-language :selected").attr("value")
+            },
+            success: function(res) {              
+              var res = JSON.parse(res);
+              $("#show").text(res.value);
+            }
+          });
+        });
+      });
+    </script>    
+  </head>
+
+  <body>    
+<h1 center>Native language translator</h1>
+
+    <div class="translation-area">
+      <form class="form-inline">
+        <input
+          type="text"
+          id="translate-text"
+          class="form-control col-sm-3"
+          placeholder="Enter text to convert"
+          name=""
+          value=""
+        />
+        <select class="form-control col-sm-3" name="language" id="from-language">
+            <% for (key in languages) { %>
+            <option value= <%= key %> ><%= languages[key] %></option>
+            <% } %>
+          </select>          
+        <select class="form-control col-sm-3" name="language" id="to-language">
+          <% for (key in languages) { %>
+          <option value= <%= key %> ><%= languages[key] %> </option>
+          <% } %>
+        </select>                
+        <button
+          type="button"
+          id="trnaslate-button"
+          class=" form-control col-sm-2 btn btn-primary"
+        >
+          Translate
+        </button>
+        
+      </form>
+      <div id="show"></div>
+    </div>
+    <div class="body">
+      <!-- <embed
+      id= "pdf"
+        class="col-sm-12"
+        src="The_brain.pdf"
+        height="1000"
+        alt="pdf"
+        pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"
+      /> -->
+      <input id="uploadPDF" type="file" name="myPDF" />
+    <input type="button" value="Preview" onclick="PreviewImage()" />
+      <iframe
+      id="pdf"
+      frameborder="0"
+      scrolling="no"
+      width="1000"
+      height="1300"
+    ></iframe>
+    
+    </div>
+    <script>
+        function PreviewImage() {
+          pdffile = document.getElementById("uploadPDF").files[0];
+          pdffile_url = URL.createObjectURL(pdffile);
+          document.getElementById("pdf").src = pdffile_url;
+        }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "native-language-translator",
+  "version": "1.0.0",
+  "description": "Native language translator for easy book reading",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulparshi/Native-Language-Translator.git"
+  },
+  "author": "Me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahulparshi/Native-Language-Translator/issues"
+  },
+  "homepage": "https://github.com/rahulparshi/Native-Language-Translator#readme",
+  "dependencies": {
+    "@vitalets/google-translate-api": "^2.8.0",
+    "body-parser": "^1.19.0",
+    "delay": "^4.3.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1"
+  }
+}
