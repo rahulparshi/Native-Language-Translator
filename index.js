@@ -5,8 +5,9 @@ const languages = require("@vitalets/google-translate-api/languages");
 const bodyParser = require("body-parser");
 
 const app = express();
-app.listen(3000, function() {
-  console.log("listening for requests on port number 3000");
+const PORT_NUMBER = process.env.PORT || 5000;
+app.listen(PORT_NUMBER, function() {
+  console.log("Connected listening for requests on port " + PORT_NUMBER);
 });
 app.set("view engine", "ejs");
 app.use(express.static("public"));
