@@ -105,20 +105,24 @@
       /> -->
       <input id="uploadPDF" type="file" name="myPDF" />
     <input type="button" value="Preview" onclick="PreviewImage()" />
-      <iframe
+      <!-- <iframe
       id="pdf"
       frameborder="0"
       scrolling="no"
       width="1000"
       height="1300"
-    ></iframe>
+    ></iframe> -->
     
+    <object  width="1000"
+    height="1300" data="" id = "pdf" type=""></object>
+
     </div>
     <script>
         function PreviewImage() {
           pdffile = document.getElementById("uploadPDF").files[0];
           pdffile_url = URL.createObjectURL(pdffile);
-          document.getElementById("pdf").src = pdffile_url;
+          //document.getElementById("pdf").src = pdffile_url;
+           document.getElementById("pdf").setAttribute("data", pdffile_url) ;
         }
       </script>
   </body>
