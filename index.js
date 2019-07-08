@@ -16,31 +16,22 @@ const urlencodedParser = bodyParser.urlencoded({
   extended: false
 });
 
-const delay = require("delay");
-
 app.get("/", function(req, res) {
   res.render("index", { languages: languages });
 });
 
 app.post("/translate", urlencodedParser, function(req, res) {
-  console.log(req.body);
+  let converted_text = null;
   (async () => {
-    var converted_text = null;
-    translate(req.body.text, {
-      client: "gtx",
-      from: req.body.from_language,
-      to: req.body.to_language
-    })
-      .then(res => {
-        converted_text = res.text;
-      })
-      .catch(err => {
-        console.error(err);
+    try {
+      result = await translate(req.body.text, {
+        client: "gtx",
+        from: req.body.from_language,
+        to: req.body.to_language
       });
-
-    await delay(1500);
-
-    // Executed 100 milliseconds later
-    res.end('{"value":"' + converted_text + '"}');
+      res.end('{"value":"' + result.text + '"}');
+    } catch (ex) {
+      console.log(ex);
+    }
   })();
 });
